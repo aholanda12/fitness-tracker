@@ -12,10 +12,15 @@ app.use(express.json())
 app.use(express.static("public"))
 app.use(logger("dev"))
 
-mongoose.connect(process.env.MONGODB_ATLAS_URI || "mongodb://localhost/workoutdb", { 
-  useNewUrlParser: true,
-  useFindAndModify: false 
-});
+mongoose.connect(
+  process.env.MONGODB_URI || 'mongodb://localhost/workoutdb',
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+  }
+);
 
 app.use(require("./routes/apiRoutes.js"))
 app.use(require("./routes/htmlRoutes.js"))
